@@ -136,3 +136,57 @@ pub fn transfer_pda_sol(ctx: Context<TransferPdaSol>, amount: u64) -> Result<()>
     Ok(())
 }
 ```
+
+### Create NFT_PDA PDA
+
+The owner of the nft can create nft_pda's PDA, and customize the content to be saved into the pda, all the content is on-chain
+
+```rust
+pub fn create_nftpda_pda(ctx: Context<CreateNftpdaPda>, content: String) -> Result<()> {
+    let nftpda_pda = &mut ctx.accounts.nftpda_pda;
+    nftpda_pda.content = content;
+    nftpda_pda.nft_mint = ctx.accounts.native_nft_mint.key();
+
+    let nft_pda = &mut ctx.accounts.nft_pda;
+    nft_pda.pda_num += 1;
+
+    let log = json!({
+        "Func":"createNftpdaPda",
+        "nftpdaPda":&ctx.accounts.nftpda_pda.key().to_string()
+    });
+    msg!("{}", serde_json::to_string(&log).unwrap());
+    Ok(())
+}
+
+#[account]
+pub struct NftpdaPda {
+    pub nft_mint: Pubkey,
+    pub content: String,
+}
+```
+
+### Ownership
+
+When the NFT is transferred, the ownership of the nft_pda belongs to the new NFT owner.There is no specific ownership record in NFTpda, only a comparison between the caller and the owner of the NFT when transferring nft_pda assets.
+
+```rust
+#[account(mut)]
+    payer: Signer<'info>,
+
+    #[account(
+    seeds = [
+    b"nft_pda",
+    native_nft_mint.key().as_ref(),
+    ],
+    bump,
+    )]
+    nft_pda: Account<'info, NftPda>,
+
+    #[account(constraint = nft_pda.nft_mint == native_nft_mint.key())]
+    native_nft_mint: Account<'info, Mint>,
+
+    #[account(mut, constraint = native_nft_token_account.amount == 1 
+        && native_nft_token_account.owner == payer.key()
+        && native_nft_token_account.mint == native_nft_mint.key())]
+    native_nft_token_account: Account<'info, TokenAccount>,
+```
