@@ -203,4 +203,5 @@ Its applications are broad:
 - The metadata domain, it makes NFTs be able to change over time and adapt, allowing the NFT to become a unique storyteller.
 - The gaming sector, it creates game items that have history and are interactive.
 - The DeFi sector, NFT PDAs serve as implementations for loans, collateral, fractional ownership, and other complex financial products.
+
 In conclusion, this protocol elevates NFTs from simple digital collectibles to full and active participants in the digital economy, and the potential is exciting.
