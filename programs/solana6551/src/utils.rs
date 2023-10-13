@@ -1,6 +1,6 @@
 use crate::errors::ErrorCode;
 use anchor_lang::prelude::{AccountInfo, CpiContext, Result};
-use anchor_lang:: system_program;
+use anchor_lang::system_program;
 use anchor_spl::token::{self, Transfer};
 
 pub fn transfer_nft<'info>(
