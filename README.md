@@ -42,7 +42,7 @@ pub struct NftPda {
 
 ### Transfer PDA NFT
 
-The owner of the nft can transfer the NFT owned by the nft_pda
+The owner of the nft can transfer the NFT owned by the nft_pda.
 
 ```rust
 pub fn transfer_pda_nft(ctx: Context<TransferPdaNft>) -> Result<()> {
@@ -77,7 +77,7 @@ pub fn transfer_pda_nft(ctx: Context<TransferPdaNft>) -> Result<()> {
 
 ### Transfer PDA Token
 
-The owner of the nft can transfer the Token(like USDC) owned by the nft_pda
+The owner of the nft can transfer the Token(like USDC) owned by the nft_pda.
 
 ```rust
 pub fn transfer_pda_token(ctx: Context<TransferPdaToken>, amount: u64) -> Result<()> {
@@ -113,7 +113,7 @@ pub fn transfer_pda_token(ctx: Context<TransferPdaToken>, amount: u64) -> Result
 
 ### Transfer PDA Sol
 
-The owner of the nft can transfer the Sol owned by the nft_pda
+The owner of the nft can transfer the Sol owned by the nft_pda.
 
 ```rust
 pub fn transfer_pda_sol(ctx: Context<TransferPdaSol>, amount: u64) -> Result<()> {
@@ -139,7 +139,7 @@ pub fn transfer_pda_sol(ctx: Context<TransferPdaSol>, amount: u64) -> Result<()>
 
 ### Create NFT_PDA PDA
 
-The owner of the nft can create nft_pda's PDA, and customize the content to be saved into the pda, all the content is on-chain
+The owner of the nft can create nft_pda's PDA, and customize the content to be saved into the pda, all the content is on-chain.
 
 ```rust
 pub fn create_nftpda_pda(ctx: Context<CreateNftpdaPda>, content: String) -> Result<()> {
@@ -190,3 +190,17 @@ When the NFT is transferred, the ownership of the nft_pda belongs to the new NFT
         && native_nft_token_account.mint == native_nft_mint.key())]
     native_nft_token_account: Account<'info, TokenAccount>,
 ```
+
+## Summary
+
+Solana-6551 protocol of creating unique Program Derived Accounts (PDAs) for each NFT on Solana can immensely push the development of the Web3 ecosystem forward.
+
+Its core features include: performing more free transfers of Sol, NFT, Tokens, and creating PDAs for each NFT for custom content on-chain.
+
+Its applications are broad:
+
+- The trading domain, it can increase asset liquidity and interoperability.
+- The metadata domain, it makes NFTs be able to change over time and adapt, allowing the NFT to become a unique storyteller.
+- The gaming sector, it creates game items that have history and are interactive.
+- The DeFi sector, NFT PDAs serve as implementations for loans, collateral, fractional ownership, and other complex financial products.
+In conclusion, this protocol elevates NFTs from simple digital collectibles to full and active participants in the digital economy, and the potential is exciting.
